@@ -79,3 +79,7 @@ class MyModel(Model):
     
 # 모델 인스턴스 생성
 model = MyModel()
+
+# 손실함수와 옵티마이저 선택
+loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+optimizer = tf.keras.optimizers.Adam()
