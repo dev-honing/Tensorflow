@@ -112,3 +112,15 @@ def train_step(images, labels):
     # 훈련 데이터에 대한 손실 및 정확도 지표 업데이트
     train_loss(loss)
     train_accuracy(labels, predictions)
+
+@tf.function
+# 테스트 스텝 함수: 주어진 이미지 및 라벨로 모델을 평가하고 손실 및 성능 지표 업데이트
+def test_step(images, labels):
+    # 모델에 이미지 전달 및 예측
+    predictions = model(images, training=False)
+    # 손실 계산
+    t_loss = loss_object(labels, predictions)
+
+    # 테스트 데이터에 대한 손실 및 정확도 지표 업데이트
+    test_loss(t_loss)
+    test_accuracy(labels, predictions)
