@@ -124,3 +124,37 @@ def test_step(images, labels):
     # 테스트 데이터에 대한 손실 및 정확도 지표 업데이트
     test_loss(t_loss)
     test_accuracy(labels, predictions)
+
+EPOCHS = 5
+
+# 지표 초기화 및 에포크 반복
+for epoch in range(EPOCHS):
+    # 에포크 시작 시 지표를 초기화
+    train_loss.reset_states()
+    train_accuracy.reset_states()
+    test_loss.reset_states()
+    test_accuracy.reset_states()
+
+    # 훈련 데이터 세트를 순회하며 모델을 훈련
+    for images, labels in train_ds:
+        train_step(images, labels)
+    
+    # 테스트 데이터 세트를 순회하며 모델을 평가
+    for test_images, test_labels in test_ds:
+        test_step(test_images, test_labels)
+    
+    # 에포트마다 손실 및 정확도를 출력
+    print(
+        f'Epoch {epoch + 1}, '
+        f'Loss: {train_loss.result()}, '
+        f'Accuracy: {train_accuracy.result() * 100}, '
+        f'Test Loss: {test_loss.result()}, '
+        f'Test Accuracy: {test_accuracy.result() * 100}'
+    )
+"""
+Epoch 1, Loss: 0.13799430429935455, Accuracy: 95.87000274658203, Test Loss: 0.0658155158162117, Test Accuracy: 97.91999816894531
+Epoch 2, Loss: 0.04229659587144852, Accuracy: 98.65666961669922, Test Loss: 0.07020941376686096, Test Accuracy: 97.93000030517578
+Epoch 3, Loss: 0.022583605721592903, Accuracy: 99.2699966430664, Test Loss: 0.053304605185985565, Test Accuracy: 98.31999969482422
+Epoch 4, Loss: 0.014100234024226665, Accuracy: 99.55999755859375, Test Loss: 0.05449584499001503, Test Accuracy: 98.47999572753906
+Epoch 5, Loss: 0.00857347808778286, Accuracy: 99.73333740234375, Test Loss: 0.05691627785563469, Test Accuracy: 98.45999908447266
+"""
