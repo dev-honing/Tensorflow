@@ -24,4 +24,19 @@ y_test: 각 이미지의 실제 숫자 라벨을 저장하는 변수
 """
 
 # 콘솔 출력 테스트
-print(mnist.load_data())
+# print(mnist.load_data())
+
+# MNIST 데이터 전처리
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+# 로드된 데이터 확인(.shape 메서드로 배열의 모양을 확인)
+print("훈련 데이터: ", x_train.shape)
+print("훈련 라벨: ", y_train.shape)
+print("테스트 데이터: ", x_test.shape)
+print("테스트 라벨: ", y_test.shape)
+"""
+훈련 데이터:  (60000, 28, 28) # 60000개의 이미지, 28x28 크기
+훈련 라벨:  (60000,) # 60000개의 라벨
+테스트 데이터:  (10000, 28, 28) # 10000개의 이미지, 28x28 크기
+테스트 라벨:  (10000,) # 10000개의 라벨
+"""
